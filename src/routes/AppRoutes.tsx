@@ -12,6 +12,7 @@ import ResetPasswordPage from '../pages/ResetPasswordPage'
 import SignInPage from '../pages/SignInPage'
 import SignUpPage from '../pages/SignUpPage'
 import SettingsPage from '../pages/settings/SettingsPage'
+import UploadVideoPage from '../pages/all-videos/UploadVideoPage'
 import type { RootState } from '../redux/store'
 
 function AppRoutes() {
@@ -34,6 +35,7 @@ function AppRoutes() {
             <Route path="/dashboard/users" element={<AllUsersPage />} />
           </Route>
           <Route path="/dashboard/videos" element={<AllVideosPage />} />
+          <Route path="/dashboard/videos/upload" element={<UploadVideoPage />} />
           <Route path="/dashboard/activity-logs" element={<ActivityLogsPage />} />
           <Route path="/dashboard/settings" element={<SettingsPage />} />
         </Route>

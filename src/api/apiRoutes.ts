@@ -13,4 +13,9 @@ export const API_ROUTES = {
   USERS: {
     LIST: '/users/',
   },
+  VIDEOS: {
+    ALL: '/videos/all',
+    MY_VIDEOS: '/videos/my-videos',
+    UPLOAD: '/videos/upload',
+  },
 } as const
