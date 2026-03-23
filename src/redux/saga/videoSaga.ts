@@ -46,6 +46,7 @@ const mapVideos = (response: any) => {
     videoCategory: video.videoCategory || video.category || 'Uncategorized',
     videoPosterUrl: video.videoPosterUrl || video.posterUrl || video.thumbnailUrl || '',
     videoUrl: video.videoUrl || video.url || '',
+    viewCount: Number(video.viewCount ?? video.views ?? video.totalViews ?? 0),
     uploadedBy: video.uploadedBy || '',
     uploadedByName: video.uploadedByName || video.name || 'Unknown uploader',
     uploadedByEmail: video.uploadedByEmail || '',

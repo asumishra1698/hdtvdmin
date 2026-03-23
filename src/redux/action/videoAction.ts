@@ -20,6 +20,7 @@ export interface VideoRecord {
   videoCategory: string
   videoPosterUrl: string
   videoUrl: string
+  viewCount: number
   uploadedBy: string
   uploadedByName: string
   uploadedByEmail: string

@@ -135,7 +135,7 @@ function AllVideosPage() {
                 <th className="px-6 py-4 font-medium">Category</th>
                 <th className="px-6 py-4 font-medium">Channel</th>
                 <th className="px-6 py-4 font-medium">Uploader</th>
-                
+                <th className="px-6 py-4 font-medium">View Count</th>
                 <th className="px-6 py-4 font-medium">Keywords</th>
                 <th className="px-6 py-4 font-medium">Uploaded</th>
               </tr>
@@ -144,7 +144,7 @@ function AllVideosPage() {
               {videosLoading
                 ? Array.from({ length: 5 }).map((_, index) => (
                     <tr key={index} className="border-b border-white/5">
-                      <td className="px-6 py-5" colSpan={8}>
+                      <td className="px-6 py-5" colSpan={9}>
                         <div className="animate-pulse space-y-3">
                           <div className="h-4 w-40 rounded bg-white/10" />
                           <div className="h-4 w-3/4 rounded bg-white/10" />
@@ -219,7 +219,12 @@ function AllVideosPage() {
                           <p className="mt-2 break-all text-slate-400">{video.uploadedByEmail || 'No email'}</p>
                         </div>
                       </td>
-                    
+                      <td className="px-6 py-5 align-top text-sm text-slate-300">
+                        <div className="min-w-[120px]">
+                          <p className="font-medium text-white">{video.viewCount.toLocaleString()}</p>
+                          <p className="mt-2 text-xs uppercase tracking-[0.22em] text-slate-500">Views</p>
+                        </div>
+                      </td>
                       <td className="px-6 py-5 align-top text-sm text-slate-300">
                         <div className="min-w-[220px] leading-6">
                           {formatKeywords(video.keywords)}
