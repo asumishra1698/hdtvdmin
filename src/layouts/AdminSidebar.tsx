@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { signOut } from '../../redux/action/authAction'
-import type { AppDispatch, RootState } from '../../redux/store'
+import { signOut } from '../redux/action/authAction'
+import type { AppDispatch, RootState } from '../redux/store'
 
 const iconClassName = 'h-5 w-5 shrink-0'
 
@@ -90,6 +90,7 @@ const SettingsIcon = () => (
 
 const menuItems = [
   { label: 'Overview', to: '/dashboard', icon: <OverviewIcon /> },
+  // Channel tab will be injected dynamically based on role
   { label: 'All Users', to: '/dashboard/users', icon: <UsersIcon /> },
   { label: 'All Videos', to: '/dashboard/videos', icon: <VideosIcon /> },
   { label: 'Activity Logs', to: '/dashboard/activity-logs', icon: <ActivityLogsIcon /> },
@@ -98,6 +99,7 @@ const menuItems = [
 
 const normalizeRole = (role: string | undefined) =>
   (role ?? '').trim().toLowerCase().replace(/[_\s-]+/g, '')
+
 
 function AdminSidebar() {
   const dispatch = useDispatch<AppDispatch>()
@@ -108,9 +110,16 @@ function AdminSidebar() {
   }
 
   const isSuperadmin = normalizeRole(user.role) === 'superadmin'
-  const visibleMenuItems = menuItems.filter(
-    (item) => item.to !== '/dashboard/users' || isSuperadmin,
-  )
+  // Insert Channel tab after Overview
+  const channelMenuItem = isSuperadmin
+    ? { label: 'All Channel', to: '/dashboard/channels', icon: <VideosIcon /> }
+    : { label: 'My Channel', to: '/dashboard/channels', icon: <VideosIcon /> }
+
+  const visibleMenuItems = [
+    menuItems[0],
+    channelMenuItem,
+    ...menuItems.slice(1).filter((item) => item.to !== '/dashboard/users' || isSuperadmin),
+  ]
 
   return (
     <aside className="modern-scrollbar glass-panel lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:overflow-y-auto">

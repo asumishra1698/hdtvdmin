@@ -6,6 +6,7 @@ import ActivityLogsPage from '../pages/ActivityLogsPage'
 import AllUsersPage from '../pages/AllUsersPage'
 import AllVideosPage from '../pages/AllVideosPage'
 import DashboardPage from '../pages/DashboardPage'
+import ChannelsPage from '../pages/ChannelsPage'
 import ForgotPasswordPage from '../pages/ForgotPasswordPage'
 import OtpVerificationPage from '../pages/OtpVerificationPage'
 import ResetPasswordPage from '../pages/ResetPasswordPage'
@@ -34,6 +35,7 @@ function AppRoutes() {
           <Route element={<ProtectedRoute allowedRoles={['superadmin']} />}>
             <Route path="/dashboard/users" element={<AllUsersPage />} />
           </Route>
+          <Route path="/dashboard/channels" element={<ChannelsPage />} />
           <Route path="/dashboard/videos" element={<AllVideosPage />} />
           <Route path="/dashboard/videos/upload" element={<UploadVideoPage />} />
           <Route path="/dashboard/activity-logs" element={<ActivityLogsPage />} />
