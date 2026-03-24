@@ -8,9 +8,9 @@ import {
   ref,
   uploadBytesResumable,
 } from 'firebase/storage'
-import { API_ROUTES } from '../../api/apiRoutes'
-import { postRequest } from '../../api/apiHelper'
-import useDocumentTitle from '../../hooks/useDocumentTitle'
+import { API_ROUTES } from '../api/apiRoutes'
+import { postRequest } from '../api/apiHelper'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const firebaseConfig = {
   projectId: 'hdtvbharat-ee20b',

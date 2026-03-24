@@ -258,6 +258,35 @@ export const getRequest = async <TResponse>(
   }
 }
 
+export const deleteRequest = async <TResponse>(
+  url: string,
+  config: Record<string, unknown> = {},
+) => {
+  try {
+    const response = await api.delete<TResponse>(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        ...((config.headers as Record<string, string> | undefined) ?? {}),
+      },
+      ...config,
+    })
+
+    invalidateApiCache()
+
+    return response.data
+  } catch (error) {
+    console.error('Error in deleteRequest:', error)
+
+    if (axios.isAxiosError(error)) {
+      throw new Error(
+        error.response?.data?.message ?? 'Network error. Please try again.',
+      )
+    }
+
+    throw error
+  }
+}
+
 export const putRequest = async <TResponse>(
   url: string,
   data: unknown,
@@ -319,32 +348,3 @@ export const patchRequest = async <TResponse>(
   }
 }
 
-export const deleteRequest = async <TResponse>(
-  url: string,
-  data: unknown = {},
-  config: Record<string, unknown> = {},
-) => {
-  try {
-    const response = await api.delete<TResponse>(url, {
-      headers: {
-        ...((config.headers as Record<string, string> | undefined) ?? {}),
-      },
-      data,
-      ...config,
-    })
-
-    invalidateApiCache()
-
-    return response.data
-  } catch (error) {
-    console.error('Error in deleteRequest:', error)
-
-    if (axios.isAxiosError(error)) {
-      throw new Error(
-        error.response?.data?.message ?? 'Network error. Please try again.',
-      )
-    }
-
-    throw error
-  }
-}

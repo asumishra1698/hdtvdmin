@@ -1,4 +1,4 @@
-import useDocumentTitle from '../../hooks/useDocumentTitle'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const logs = [
   'Admin account permissions updated for the content review team.',

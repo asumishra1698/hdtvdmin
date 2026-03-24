@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import StatCard from '../components/StatCard'
 import useDocumentTitle from '../hooks/useDocumentTitle'
@@ -33,10 +34,49 @@ const teamPresence = [
   { name: 'Security', load: '01 incident review', tone: 'bg-brand-cyan' },
 ]
 
+const getIstGreeting = (date: Date) => {
+  const hourInIst = Number(
+    new Intl.DateTimeFormat('en-IN', {
+      hour: 'numeric',
+      hour12: false,
+      timeZone: 'Asia/Kolkata',
+    }).format(date),
+  )
+
+  if (hourInIst >= 5 && hourInIst < 12) {
+    return 'Good morning'
+  }
+
+  if (hourInIst >= 12 && hourInIst < 17) {
+    return 'Good afternoon'
+  }
+
+  if (hourInIst >= 17 && hourInIst < 21) {
+    return 'Good evening'
+  }
+
+  return 'Good night'
+}
+
 function DashboardPage() {
   useDocumentTitle('Dashboard')
 
   const user = useSelector((state: RootState) => state.auth.user)
+  const [greeting, setGreeting] = useState(() => getIstGreeting(new Date()))
+
+  useEffect(() => {
+    const updateGreeting = () => {
+      setGreeting(getIstGreeting(new Date()))
+    }
+
+    updateGreeting()
+
+    const intervalId = window.setInterval(updateGreeting, 60_000)
+
+    return () => {
+      window.clearInterval(intervalId)
+    }
+  }, [])
 
   if (!user) {
     return null
@@ -49,10 +89,10 @@ function DashboardPage() {
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-brand-amber">Control center</p>
             <h2 className="mt-3 text-3xl font-semibold text-white sm:text-4xl">
-              Good evening, {user.name.split(' ')[0]}.
+              {greeting}, {user.name.split(' ')[0]}.
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300 sm:text-base">
-              Critical systems are stable. Team queues are moving on schedule, and there are a few approvals waiting for review.
+              HDTV Bharat runs smarter every day.
             </p>
           </div>
 

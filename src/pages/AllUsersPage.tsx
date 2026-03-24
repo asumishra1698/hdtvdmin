@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { DEFAULT_API_CACHE_TTL_MS } from '../../api/apiHelper'
-import usePagination from '../../hooks/usePagination'
-import useDocumentTitle from '../../hooks/useDocumentTitle'
-import { getAllUsersRequest } from '../../redux/action/authAction'
-import type { AppDispatch, RootState } from '../../redux/store'
+import { DEFAULT_API_CACHE_TTL_MS } from '../api/apiHelper'
+import usePagination from '../hooks/usePagination'
+import useDocumentTitle from '../hooks/useDocumentTitle'
+import { getAllUsersRequest } from '../redux/action/authAction'
+import type { AppDispatch, RootState } from '../redux/store'
 
 const paginationButtonClassName =
   'rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:border-white/20 disabled:cursor-not-allowed disabled:text-slate-500'

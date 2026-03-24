@@ -1,8 +1,16 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { DEFAULT_API_CACHE_TTL_MS, getRequest } from '../../api/apiHelper'
+import {
+  DEFAULT_API_CACHE_TTL_MS,
+  deleteRequest,
+  getRequest,
+  invalidateApiCache,
+} from '../../api/apiHelper'
 import { API_ROUTES } from '../../api/apiRoutes'
 import { toast } from 'react-toastify'
 import {
+  DELETE_VIDEO_FAILURE,
+  DELETE_VIDEO_REQUEST,
+  DELETE_VIDEO_SUCCESS,
   GET_VIDEOS_FAILURE,
   GET_VIDEOS_REQUEST,
   GET_VIDEOS_SUCCESS,
@@ -79,6 +87,26 @@ function* getVideosSaga(action: any): any {
   }
 }
 
+function* deleteVideoSaga(action: any): any {
+  const videoId = action.payload?.videoId
+
+  try {
+    if (!videoId) {
+      throw new Error('Video id is required')
+    }
+
+    yield call(deleteRequest, API_ROUTES.VIDEOS.DELETE(videoId))
+    yield call(invalidateApiCache, '/videos')
+    yield put({ type: DELETE_VIDEO_SUCCESS, payload: videoId })
+    toast.success('Video deleted successfully')
+  } catch (error: any) {
+    const message = error?.message || 'Failed to delete video'
+    yield put({ type: DELETE_VIDEO_FAILURE, payload: { videoId, error: message } })
+    toast.error(message)
+  }
+}
+
 export default function* videoSaga() {
   yield takeLatest(GET_VIDEOS_REQUEST, getVideosSaga)
+  yield takeLatest(DELETE_VIDEO_REQUEST, deleteVideoSaga)
 }

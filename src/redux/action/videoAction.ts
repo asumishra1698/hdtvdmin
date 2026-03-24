@@ -1,4 +1,7 @@
 import {
+  DELETE_VIDEO_FAILURE,
+  DELETE_VIDEO_REQUEST,
+  DELETE_VIDEO_SUCCESS,
   GET_VIDEOS_FAILURE,
   GET_VIDEOS_REQUEST,
   GET_VIDEOS_SUCCESS,
@@ -6,6 +9,10 @@ import {
 
 export interface GetVideosPayload {
   role?: string
+}
+
+export interface DeleteVideoPayload {
+  videoId: string
 }
 
 export interface VideoRecord {
@@ -40,4 +47,19 @@ export const getVideosSuccess = (videos: VideoRecord[]) => ({
 export const getVideosFailure = (error: string) => ({
   type: GET_VIDEOS_FAILURE,
   payload: error,
+} as const)
+
+export const deleteVideoRequest = (payload: DeleteVideoPayload) => ({
+  type: DELETE_VIDEO_REQUEST,
+  payload,
+} as const)
+
+export const deleteVideoSuccess = (videoId: string) => ({
+  type: DELETE_VIDEO_SUCCESS,
+  payload: videoId,
+} as const)
+
+export const deleteVideoFailure = (payload: { videoId: string; error: string }) => ({
+  type: DELETE_VIDEO_FAILURE,
+  payload,
 } as const)

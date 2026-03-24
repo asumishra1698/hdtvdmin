@@ -17,5 +17,6 @@ export const API_ROUTES = {
     ALL: '/videos/all',
     MY_VIDEOS: '/videos/my-videos',
     UPLOAD: '/videos/upload',
+    DELETE: (videoId: string) => `/videos/${videoId}`,
   },
 } as const

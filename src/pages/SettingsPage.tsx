@@ -1,4 +1,4 @@
-import useDocumentTitle from '../../hooks/useDocumentTitle'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const settingGroups = [
   { title: 'Security', description: 'Manage session timeout, password rotation, and 2FA enforcement.' },

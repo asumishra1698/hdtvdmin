@@ -3,12 +3,97 @@ import { NavLink } from 'react-router-dom'
 import { signOut } from '../../redux/action/authAction'
 import type { AppDispatch, RootState } from '../../redux/store'
 
+const iconClassName = 'h-5 w-5 shrink-0'
+
+const OverviewIcon = () => (
+  <svg
+    aria-hidden="true"
+    className={iconClassName}
+    fill="none"
+    stroke="currentColor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="1.8"
+    viewBox="0 0 24 24"
+  >
+    <path d="M3 12.5 12 4l9 8.5" />
+    <path d="M5.5 10.5V20h13V10.5" />
+    <path d="M9.5 20v-5h5v5" />
+  </svg>
+)
+
+const UsersIcon = () => (
+  <svg
+    aria-hidden="true"
+    className={iconClassName}
+    fill="none"
+    stroke="currentColor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="1.8"
+    viewBox="0 0 24 24"
+  >
+    <path d="M16.5 19.5v-1a4 4 0 0 0-4-4h-5a4 4 0 0 0-4 4v1" />
+    <circle cx="10" cy="7.5" r="3.5" />
+    <path d="M17 11a3 3 0 1 0 0-6" />
+    <path d="M20.5 19.5v-1a4 4 0 0 0-3-3.87" />
+  </svg>
+)
+
+const VideosIcon = () => (
+  <svg
+    aria-hidden="true"
+    className={iconClassName}
+    fill="none"
+    stroke="currentColor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="1.8"
+    viewBox="0 0 24 24"
+  >
+    <rect x="3.5" y="5" width="17" height="14" rx="2.5" />
+    <path d="m10 9 5 3-5 3V9Z" />
+  </svg>
+)
+
+const ActivityLogsIcon = () => (
+  <svg
+    aria-hidden="true"
+    className={iconClassName}
+    fill="none"
+    stroke="currentColor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="1.8"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 6v6l4 2" />
+    <circle cx="12" cy="12" r="8.5" />
+  </svg>
+)
+
+const SettingsIcon = () => (
+  <svg
+    aria-hidden="true"
+    className={iconClassName}
+    fill="none"
+    stroke="currentColor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="1.8"
+    viewBox="0 0 24 24"
+  >
+    <path d="M12 8.75a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5Z" />
+    <path d="M19.4 15a1 1 0 0 0 .2 1.1l.1.1a2 2 0 0 1-2.83 2.83l-.1-.1a1 1 0 0 0-1.1-.2 1 1 0 0 0-.6.92V20a2 2 0 0 1-4 0v-.14a1 1 0 0 0-.67-.95 1 1 0 0 0-1.03.23l-.1.1a2 2 0 0 1-2.83-2.83l.1-.1a1 1 0 0 0 .2-1.1 1 1 0 0 0-.92-.6H4a2 2 0 0 1 0-4h.14a1 1 0 0 0 .95-.67 1 1 0 0 0-.23-1.03l-.1-.1a2 2 0 0 1 2.83-2.83l.1.1a1 1 0 0 0 1.1.2 1 1 0 0 0 .6-.92V4a2 2 0 0 1 4 0v.14a1 1 0 0 0 .67.95 1 1 0 0 0 1.03-.23l.1-.1a2 2 0 0 1 2.83 2.83l-.1.1a1 1 0 0 0-.2 1.1 1 1 0 0 0 .92.6H20a2 2 0 0 1 0 4h-.14a1 1 0 0 0-.95.67 1 1 0 0 0 .23 1.03l.1.1" />
+  </svg>
+)
+
 const menuItems = [
-  { label: 'Overview', to: '/dashboard' },
-  { label: 'All Users', to: '/dashboard/users' },
-  { label: 'All Videos', to: '/dashboard/videos' },
-  { label: 'Activity Logs', to: '/dashboard/activity-logs' },
-  { label: 'Settings', to: '/dashboard/settings' },
+  { label: 'Overview', to: '/dashboard', icon: <OverviewIcon /> },
+  { label: 'All Users', to: '/dashboard/users', icon: <UsersIcon /> },
+  { label: 'All Videos', to: '/dashboard/videos', icon: <VideosIcon /> },
+  { label: 'Activity Logs', to: '/dashboard/activity-logs', icon: <ActivityLogsIcon /> },
+  { label: 'Settings', to: '/dashboard/settings', icon: <SettingsIcon /> },
 ]
 
 const normalizeRole = (role: string | undefined) =>
@@ -36,13 +121,10 @@ function AdminSidebar() {
               <img
                 alt="HDTV Bharat logo"
                 className="h-auto w-40 object-contain"
-                src="https://hdtvbharat.com/images/hdtv_bharat_logo.png"
-              />          
+                src="https://hdtvbharat.com/hdtv_bharat_logo.png"
+              />
             </div>
             <h1 className="mt-3 text-3xl font-semibold text-white">Dashboard</h1>
-            <p className="mt-3 text-sm leading-6 text-slate-400">
-              Fixed navigation for every admin workspace section with quick access to operations.
-            </p>
           </div>
 
           <div className="rounded-[26px] border border-white/10 bg-white/5 p-5">
@@ -65,7 +147,7 @@ function AdminSidebar() {
                 key={item.to}
                 className={({ isActive }) =>
                   [
-                    'block rounded-2xl border px-4 py-3 transition',
+                    'group flex items-center gap-3 rounded-2xl border px-4 py-3 transition',
                     isActive
                       ? 'border-brand-cyan/25 bg-brand-cyan/10 text-white'
                       : 'border-white/10 bg-white/5 hover:border-white/20 hover:text-white',
@@ -74,7 +156,8 @@ function AdminSidebar() {
                 end={item.to === '/dashboard'}
                 to={item.to}
               >
-                {item.label}
+                <span className="text-slate-400 transition group-hover:text-white">{item.icon}</span>
+                <span>{item.label}</span>
               </NavLink>
             ))}
           </nav>
