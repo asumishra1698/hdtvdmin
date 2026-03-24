@@ -146,22 +146,18 @@ function AdminSidebar() {
     ];
 
   return (
-    <aside className="modern-scrollbar glass-panel lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:overflow-y-auto">
+    <aside className="modern-scrollbar glass-panel rounded-lg lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:overflow-y-auto">
       <div className="flex h-full flex-col justify-between gap-8 px-6 py-7">
-        <div className="space-y-8">
-          <div>
-            <div className="flex items-center gap-3">
+        <div className="space-y-4">       
+
+          <div className="rounded-lg border border-white/10 bg-white/5 p-5">
+          <div className="flex items-center gap-3">
               <img
                 alt="HDTV Bharat logo"
                 className="h-auto w-40 object-contain"
                 src="https://hdtvbharat.com/hdtv_bharat_logo.png"
               />
-            </div>
-            <h1 className="mt-3 text-3xl font-semibold text-white">Dashboard</h1>
-          </div>
-
-          <div className="rounded-[26px] border border-white/10 bg-white/5 p-5">
-            <p className="text-xs uppercase tracking-[0.28em] text-slate-400">Signed in as</p>
+            </div>            
             <p className="mt-4 text-xl font-semibold text-white">{user.name}</p>
             <p className="mt-2 text-sm text-slate-300">{user.email}</p>
             <div className="mt-5 flex flex-wrap gap-2 text-xs uppercase tracking-[0.22em]">
@@ -180,7 +176,7 @@ function AdminSidebar() {
                 key={item.to}
                 className={({ isActive }) =>
                   [
-                    'group flex items-center gap-3 rounded-2xl border px-4 py-3 transition',
+                    'group flex items-center gap-3 rounded-md border px-4 py-3 transition',
                     isActive
                       ? 'border-brand-cyan/25 bg-brand-cyan/10 text-white'
                       : 'border-white/10 bg-white/5 hover:border-white/20 hover:text-white',
@@ -197,7 +193,7 @@ function AdminSidebar() {
         </div>
 
         <button
-          className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-rose-300/40 hover:bg-rose-400/10"
+          className="rounded-md border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:border-rose-300/40 hover:bg-rose-400/10"
           onClick={() => dispatch(signOut())}
           type="button"
         >

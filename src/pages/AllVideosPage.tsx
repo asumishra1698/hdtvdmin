@@ -118,7 +118,7 @@ function AllVideosPage() {
 
   return (
     <>
-      <header className="glass-panel px-6 py-6 sm:px-8">
+      <header className="glass-panel rounded-lg px-6 py-6 sm:px-8">
         <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-brand-amber">Video library</p>
@@ -140,7 +140,7 @@ function AllVideosPage() {
       </header>
 
       <section className="grid gap-5 md:grid-cols-3">
-        <article className="glass-panel p-6">
+        <article className="glass-panel rounded-lg p-6">
           <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Video count</p>
           <p className="mt-3 text-3xl font-semibold text-white">{videos.length}</p>
           <p className="mt-3 text-sm text-slate-300">
@@ -148,13 +148,13 @@ function AllVideosPage() {
           </p>
         </article>
 
-        <article className="glass-panel p-6">
+        <article className="glass-panel rounded-lg p-6">
           <p className="text-xs uppercase tracking-[0.24em] text-brand-cyan">Categories</p>
           <p className="mt-3 text-3xl font-semibold text-white">{categoriesCount}</p>
           <p className="mt-3 text-sm text-slate-300">Unique video categories returned by the API.</p>
         </article>
 
-        <article className="glass-panel p-6">
+        <article className="glass-panel rounded-lg p-6">
           <p className="text-xs uppercase tracking-[0.24em] text-brand-amber">Uploaders</p>
           <p className="mt-3 text-3xl font-semibold text-white">{uploadersCount}</p>
           <p className="mt-3 text-sm text-slate-300">Distinct uploaders represented in the result set.</p>
@@ -162,7 +162,7 @@ function AllVideosPage() {
       </section>
 
       {videosError ? (
-        <section className="glass-panel p-6">
+        <section className="glass-panel rounded-lg p-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <p className="text-sm uppercase tracking-[0.24em] text-rose-300">Fetch error</p>
@@ -179,7 +179,7 @@ function AllVideosPage() {
         </section>
       ) : null}
 
-      <section className="glass-panel overflow-hidden">
+      <section className="glass-panel rounded-lg overflow-hidden">
         <div className="flex flex-col gap-3 border-b border-white/10 px-6 py-2 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-slate-400">
             {videosLoading ? 'Loading records...' : `${videos.length} rows loaded`}
@@ -330,7 +330,7 @@ function AllVideosPage() {
       </section>
 
       {!videosLoading && !videosError && videos.length === 0 ? (
-        <section className="glass-panel p-8 text-center">
+        <section className="glass-panel rounded-lg p-8 text-center">
           <p className="text-sm uppercase tracking-[0.28em] text-slate-400">No videos found</p>
           <h3 className="mt-3 text-2xl font-semibold text-white">The API returned an empty video list.</h3>
           <p className="mt-3 text-sm leading-6 text-slate-300">

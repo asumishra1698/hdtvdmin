@@ -6,13 +6,14 @@ import useDocumentTitle from '../hooks/useDocumentTitle'
 import { getAllUsersRequest } from '../redux/action/authAction'
 import type { AppDispatch, RootState } from '../redux/store'
 
+
 const paginationButtonClassName =
-  'rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:border-white/20 disabled:cursor-not-allowed disabled:text-slate-500'
+  'rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:border-white/20 disabled:cursor-not-allowed disabled:text-slate-500'
 
 const selectClassName =
-  'rounded-xl border border-white/10 bg-slate-950 px-3 py-2 text-white outline-none transition focus:border-brand-amber/60'
+  'rounded-lg border border-white/10 bg-slate-950 px-3 py-2 text-white outline-none transition focus:border-brand-amber/60'
 
-const panelClassName = 'rounded-[24px] border border-white/10 bg-white/5 p-5'
+const panelClassName = 'rounded-lg border border-white/10 bg-white/5 p-5'
 
 const rowsPerPageOptions = [10, 20, 50]
 
@@ -50,7 +51,7 @@ function AllUsersPage() {
 
   return (
     <>
-      <header className="glass-panel px-6 py-6 sm:px-8">
+      <header className="glass-panel rounded-lg px-6 py-6 sm:px-8">
         <p className="text-sm uppercase tracking-[0.35em] text-brand-cyan">User management</p>
         <h2 className="mt-3 text-3xl font-semibold text-white">All users</h2>
         <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-300">
@@ -58,7 +59,7 @@ function AllUsersPage() {
         </p>
       </header>
 
-      <section className="glass-panel px-6 py-6">
+      <section className="glass-panel rounded-lg px-6 py-6">
         <div className="space-y-4">
           {usersLoading ? (
             <article className={`${panelClassName} text-sm text-slate-300`}>
@@ -67,7 +68,7 @@ function AllUsersPage() {
           ) : null}
 
           {!usersLoading && usersError ? (
-            <article className="rounded-[24px] border border-rose-400/30 bg-rose-500/10 p-5 text-sm text-rose-200">
+            <article className="rounded-lg border border-rose-400/30 bg-rose-500/10 p-5 text-sm text-rose-200">
               {usersError}
             </article>
           ) : null}
@@ -100,7 +101,7 @@ function AllUsersPage() {
         </div>
 
         <div className="mt-6 border-t border-white/10 pt-6">
-          <div className="flex flex-col gap-4 rounded-[24px] border border-white/10 bg-white/5 p-4">
+          <div className="flex flex-col gap-4 rounded-lg border border-white/10 bg-white/5 p-4">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="text-sm font-medium text-white">User directory</p>

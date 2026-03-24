@@ -84,7 +84,7 @@ function DashboardPage() {
 
   return (
     <>
-      <header className="glass-panel px-6 py-6 sm:px-8">
+      <header className="glass-panel rounded-md px-6 py-6 sm:px-8">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <p className="text-sm uppercase tracking-[0.35em] text-brand-amber">Control center</p>
@@ -97,11 +97,11 @@ function DashboardPage() {
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
+            <div className="rounded-md border border-white/10 bg-white/5 px-4 py-4">
               <p className="text-xs uppercase tracking-[0.28em] text-slate-400">Response time</p>
               <p className="mt-3 text-2xl font-semibold text-white">148 ms</p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
+            <div className="rounded-md border border-white/10 bg-white/5 px-4 py-4">
               <p className="text-xs uppercase tracking-[0.28em] text-slate-400">Open incidents</p>
               <p className="mt-3 text-2xl font-semibold text-white">02</p>
             </div>
@@ -117,7 +117,7 @@ function DashboardPage() {
       </div>
 
       <div className="grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
-        <section className="glass-panel px-6 py-6">
+        <section className="glass-panel rounded-md px-6 py-6">
           <div className="flex items-center justify-between gap-4">
             <div>
               <p className="text-sm uppercase tracking-[0.32em] text-brand-cyan">Approval queue</p>
@@ -130,7 +130,7 @@ function DashboardPage() {
 
           <div className="mt-6 space-y-4">
             {releaseQueue.map((item) => (
-              <article key={item.title} className="rounded-[24px] border border-white/10 bg-white/5 p-5">
+              <article key={item.title} className="rounded-md border border-white/10 bg-white/5 p-5">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                   <div>
                     <h4 className="text-lg font-semibold text-white">{item.title}</h4>
@@ -151,7 +151,7 @@ function DashboardPage() {
             <h3 className="mt-2 text-2xl font-semibold text-white">Recent activity</h3>
             <div className="mt-6 space-y-4">
               {recentEvents.map((event) => (
-                <div key={event} className="flex gap-3 rounded-[22px] border border-white/10 bg-white/5 p-4">
+                <div key={event} className="flex gap-3 rounded-md border border-white/10 bg-white/5 p-4">
                   <div className="mt-1 h-2.5 w-2.5 rounded-full bg-brand-cyan" />
                   <p className="text-sm leading-6 text-slate-300">{event}</p>
                 </div>
@@ -159,12 +159,12 @@ function DashboardPage() {
             </div>
           </div>
 
-          <div className="glass-panel px-6 py-6">
+          <div className="glass-panel rounded-md px-6 py-6">
             <p className="text-sm uppercase tracking-[0.32em] text-brand-cyan">Teams online</p>
             <h3 className="mt-2 text-2xl font-semibold text-white">Current workload</h3>
             <div className="mt-6 space-y-4">
               {teamPresence.map((team) => (
-                <div key={team.name} className="flex items-center justify-between rounded-[22px] border border-white/10 bg-white/5 px-4 py-4">
+                <div key={team.name} className="flex items-center justify-between rounded-md border border-white/10 bg-white/5 px-4 py-4">
                   <div className="flex items-center gap-3">
                     <span className={`h-3 w-3 rounded-full ${team.tone}`} />
                     <div>
