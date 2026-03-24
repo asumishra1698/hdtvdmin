@@ -5,43 +5,43 @@ import useDocumentTitle from '../hooks/useDocumentTitle'
 import { deleteVideoRequest, getVideosRequest } from '../redux/action/videoAction'
 import type { AppDispatch, RootState } from '../redux/store'
 
-const iconButtonClassName =
-  'inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition hover:border-white/20 hover:bg-white/10 hover:text-white'
+// const iconButtonClassName =
+//   'inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-300 transition hover:border-white/20 hover:bg-white/10 hover:text-white'
 
-const EditIcon = () => (
-  <svg
-    aria-hidden="true"
-    className="h-4 w-4"
-    fill="none"
-    stroke="currentColor"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    strokeWidth="1.8"
-    viewBox="0 0 24 24"
-  >
-    <path d="M12 20h9" />
-    <path d="M16.5 3.5a2.12 2.12 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5Z" />
-  </svg>
-)
+// const EditIcon = () => (
+//   <svg
+//     aria-hidden="true"
+//     className="h-4 w-4"
+//     fill="none"
+//     stroke="currentColor"
+//     strokeLinecap="round"
+//     strokeLinejoin="round"
+//     strokeWidth="1.8"
+//     viewBox="0 0 24 24"
+//   >
+//     <path d="M12 20h9" />
+//     <path d="M16.5 3.5a2.12 2.12 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5Z" />
+//   </svg>
+// )
 
-const DeleteIcon = () => (
-  <svg
-    aria-hidden="true"
-    className="h-4 w-4"
-    fill="none"
-    stroke="currentColor"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    strokeWidth="1.8"
-    viewBox="0 0 24 24"
-  >
-    <path d="M3 6h18" />
-    <path d="M8 6V4h8v2" />
-    <path d="M19 6l-1 14H6L5 6" />
-    <path d="M10 11v5" />
-    <path d="M14 11v5" />
-  </svg>
-)
+// const DeleteIcon = () => (
+//   <svg
+//     aria-hidden="true"
+//     className="h-4 w-4"
+//     fill="none"
+//     stroke="currentColor"
+//     strokeLinecap="round"
+//     strokeLinejoin="round"
+//     strokeWidth="1.8"
+//     viewBox="0 0 24 24"
+//   >
+//     <path d="M3 6h18" />
+//     <path d="M8 6V4h8v2" />
+//     <path d="M19 6l-1 14H6L5 6" />
+//     <path d="M10 11v5" />
+//     <path d="M14 11v5" />
+//   </svg>
+// )
 
 const formatDate = (value: string) => {
   if (!value) {
@@ -193,9 +193,7 @@ function AllVideosPage() {
                 <th className="px-6 py-4 font-medium">Poster</th>
                 <th className="min-w-[220px] px-6 py-4 font-medium">Preview</th>
                 <th className="px-6 py-4 font-medium">Video Details</th>
-                <th className="px-6 py-4 font-medium">Category</th>
-                <th className="px-6 py-4 font-medium">Channel</th>
-                <th className="px-6 py-4 font-medium">Uploader</th>
+                <th className="px-6 py-4 font-medium">Details</th>
                 <th className="px-6 py-4 font-medium">View Count</th>
                 <th className="px-6 py-4 font-medium">Keywords</th>
                 <th className="px-6 py-4 font-medium">Uploaded</th>
@@ -263,22 +261,20 @@ function AllVideosPage() {
                         </p>
                       </div>
                     </td>
-                    <td className="px-6 py-5 align-top">
-                      <div className="min-w-[120px]">
-                        <span className="rounded-full border border-brand-cyan/20 bg-brand-cyan/10 px-3 py-2 text-[11px] uppercase tracking-[0.22em] text-brand-cyan">
-                          {video.videoCategory}
-                        </span>
-                      </div>
-                    </td>
                     <td className="px-6 py-5 align-top text-sm text-slate-300">
-                      <div className="min-w-[140px]">
-                        <p>{video.channelName}</p>
-                      </div>
-                    </td>
-                    <td className="px-6 py-5 align-top text-sm text-slate-300">
-                      <div className="min-w-[220px]">
-                        <p className="font-medium text-white">{video.uploadedByName}</p>
-                        <p className="mt-2 break-all text-slate-400">{video.uploadedByEmail || 'No email'}</p>
+                      <div className="min-w-[220px] space-y-2">
+                        <div>
+                          <span className="rounded-full border border-brand-cyan/20 bg-brand-cyan/10 px-3 py-2 text-[11px] uppercase tracking-[0.22em] text-brand-cyan mr-2">
+                            {video.videoCategory}
+                          </span>
+                        </div>
+                        <div>
+                          <span className="font-semibold text-white">Channel:</span> {video.channelName}
+                        </div>
+                        <div>
+                          <span className="font-semibold text-white">Uploader:</span> {video.uploadedByName}
+                          <span className="ml-2 text-xs text-slate-400">{video.uploadedByEmail || 'No email'}</span>
+                        </div>
                       </div>
                     </td>
                     <td className="px-6 py-5 align-top text-sm text-slate-300">
@@ -299,34 +295,31 @@ function AllVideosPage() {
                       </div>
                     </td>
                     <td className="px-6 py-5 align-top">
-                      <div className="flex min-w-[112px] items-center gap-3">
-                        {(() => {
-                          const isDeleting = deletingIds.includes(video.id)
-
-                          return (
-                            <>
-                              <button
-                                aria-label={`Edit ${video.title}`}
-                                className={iconButtonClassName}
-                                disabled={isDeleting}
-                                title="Edit"
-                                type="button"
-                              >
-                                <EditIcon />
-                              </button>
-                              <button
-                                aria-label={`Delete ${video.title}`}
-                                className={`${iconButtonClassName} hover:border-rose-300/40 hover:bg-rose-400/10 hover:text-rose-200 disabled:cursor-not-allowed disabled:opacity-50`}
-                                disabled={isDeleting}
-                                onClick={() => handleDeleteVideo(video.id, video.title)}
-                                title={isDeleting ? 'Deleting...' : 'Delete'}
-                                type="button"
-                              >
-                                <DeleteIcon />
-                              </button>
-                            </>
-                          )
-                        })()}
+                      <div className="min-w-[112px]">
+                        <select
+                          className="w-full rounded-xl border border-white/10 bg-[#181924] px-3 py-2 text-sm text-white focus:border-brand-cyan focus:outline-none cursor-pointer"
+                          style={{ minWidth: 140, fontWeight: 500, letterSpacing: 0.2 }}
+                          disabled={deletingIds.includes(video.id)}
+                          defaultValue=""
+                          onChange={e => {
+                            if (e.target.value === 'edit') {
+                              alert('Edit action for ' + video.title)
+                            } else if (e.target.value === 'delete') {
+                              handleDeleteVideo(video.id, video.title)
+                            }
+                            e.target.value = ''
+                          }}
+                        >
+                          <option value="" disabled style={{ color: '#bcbcbc', background: '#23243a', fontWeight: 600 }}>
+                            Select Action
+                          </option>
+                          <option value="edit" style={{ color: '#0ea5e9', background: '#23243a', fontWeight: 600 }}>
+                            Edit
+                          </option>
+                          <option value="delete" style={{ color: '#ef4444', background: '#23243a', fontWeight: 600 }}>
+                            Delete
+                          </option>
+                        </select>
                       </div>
                     </td>
                   </tr>
