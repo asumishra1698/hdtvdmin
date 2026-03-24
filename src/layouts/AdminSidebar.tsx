@@ -40,6 +40,7 @@ const UsersIcon = () => (
   </svg>
 )
 
+
 const VideosIcon = () => (
   <svg
     aria-hidden="true"
@@ -53,6 +54,22 @@ const VideosIcon = () => (
   >
     <rect x="3.5" y="5" width="17" height="14" rx="2.5" />
     <path d="m10 9 5 3-5 3V9Z" />
+  </svg>
+)
+
+const ChannelIcon = () => (
+  <svg
+    aria-hidden="true"
+    className={iconClassName}
+    fill="none"
+    stroke="currentColor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="1.8"
+    viewBox="0 0 24 24"
+  >
+    <circle cx="12" cy="12" r="7.5" />
+    <path d="M8 12h8M12 8v8" />
   </svg>
 )
 
@@ -90,8 +107,8 @@ const SettingsIcon = () => (
 
 const menuItems = [
   { label: 'Overview', to: '/dashboard', icon: <OverviewIcon /> },
-  // Channel tab will be injected dynamically based on role
   { label: 'All Users', to: '/dashboard/users', icon: <UsersIcon /> },
+
   { label: 'All Videos', to: '/dashboard/videos', icon: <VideosIcon /> },
   { label: 'Activity Logs', to: '/dashboard/activity-logs', icon: <ActivityLogsIcon /> },
   { label: 'Settings', to: '/dashboard/settings', icon: <SettingsIcon /> },
@@ -110,16 +127,23 @@ function AdminSidebar() {
   }
 
   const isSuperadmin = normalizeRole(user.role) === 'superadmin'
-  // Insert Channel tab after Overview
   const channelMenuItem = isSuperadmin
-    ? { label: 'All Channel', to: '/dashboard/channels', icon: <VideosIcon /> }
-    : { label: 'My Channel', to: '/dashboard/channels', icon: <VideosIcon /> }
+    ? { label: 'All Channel', to: '/dashboard/channels', icon: <ChannelIcon /> }
+    : { label: 'My Channel', to: '/dashboard/channels', icon: <ChannelIcon /> }
 
-  const visibleMenuItems = [
-    menuItems[0],
-    channelMenuItem,
-    ...menuItems.slice(1).filter((item) => item.to !== '/dashboard/users' || isSuperadmin),
-  ]
+  const filteredMenuItems = menuItems.filter((item) => item.to !== '/dashboard/users');
+  const visibleMenuItems = isSuperadmin
+    ? [
+      menuItems[0],
+      menuItems[1],
+      channelMenuItem,
+      ...filteredMenuItems.slice(1),
+    ]
+    : [
+      menuItems[0],
+      channelMenuItem,
+      ...filteredMenuItems.slice(1),
+    ];
 
   return (
     <aside className="modern-scrollbar glass-panel lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:overflow-y-auto">
